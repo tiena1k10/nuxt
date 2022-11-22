@@ -1,7 +1,7 @@
 <template>
     <div id="game"></div>
 </template>
-<script>
+<script lang="ts">
 import config from '@/src/config'
 import GameScene from '@/src/scenes/Game'
 import Phaser from 'phaser'
