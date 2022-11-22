@@ -1,0 +1,42 @@
+#error-page {
+  .wrapper-body {
+    margin: 11rem 0 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem 0;
+      text-align: center;
+      font-family: 'CircularStd-Medium', serif;
+
+      h4 {
+        margin-top: 2rem;
+      }
+
+      .text-delete {
+        opacity: .75;
+        max-width: 410px;
+      }
+    }
+  }
+
+  @media (max-width: 779px) { 
+
+
+    .wrapper-body {
+      margin: 7rem 0;
+      img {
+        width: 222px;
+      }
+      .wrapper-text { 
+        margin : 0
+      }
+    }
+  }
+}

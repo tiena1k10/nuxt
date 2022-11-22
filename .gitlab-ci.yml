@@ -1,0 +1,80 @@
+image: docker:19.03.12
+
+stages:
+  - build
+  - deploy
+
+variables:
+  RUNTIME_IMAGE_TAG: runtime-$CI_COMMIT_SHORT_SHA
+  RUNTIME_IMAGE: $CI_REGISTRY_IMAGE:runtime-$CI_COMMIT_SHORT_SHA
+  BUILDER_IMAGE: $CI_REGISTRY_IMAGE/builder:$CI_COMMIT_REF_NAME
+
+.build_template:
+  # services:
+  #   - docker:19.03.12-dind
+  stage: build
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker build -t $RUNTIME_IMAGE .
+    - docker push $RUNTIME_IMAGE
+
+.deploy_template:
+  stage: deploy
+  image: alpine
+  before_script:
+    - apk add --update openssh-client bash
+    - eval $(ssh-agent -s)
+    - bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
+  script:
+    - |
+      ssh -o StrictHostKeyChecking=no -t $SSH_ENDPOINT /bin/bash -s << EOT
+      export IMAGE_TAG=$RUNTIME_IMAGE_TAG
+      set -e
+      cd /data/bitu-system/$ENV/swarm
+      ./deploy.sh $APPLICATION
+      EOT
+
+# Development pipeline
+
+build_staging:
+  extends: .build_template
+  environment:
+    name: staging
+  only:
+    - staging
+
+deploy_staging:
+    extends: .deploy_template
+    environment:
+        name: staging
+    variables:
+        SSH_PRIVATE_KEY: $STAGING_SSH_PRIVATE_KEY
+        SSH_ENDPOINT: $STAGING_SSH_ENDPOINT
+        ENV: staging
+        APPLICATION: bitu-user-web
+    only:
+        - staging
+
+# Production pipeline
+
+build_prod:
+  extends: .build_template
+  when: manual
+  allow_failure: false
+  environment:
+    name: production
+  only:
+    - release
+
+deploy_prod:
+  extends: .deploy_template
+  when: on_success
+  environment:
+    name: production
+  variables:
+    SSH_PRIVATE_KEY: $PROD_SSH_PRIVATE_KEY
+    SSH_ENDPOINT: $PROD_SSH_ENDPOINT
+    ENV: prod
+    APPLICATION: bitu-user-web
+  only:
+    - release
