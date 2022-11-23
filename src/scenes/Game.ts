@@ -5,7 +5,7 @@ export default class Demo extends Phaser.Scene {
         super('GameScene')
     }
     preload() {
-        this.load.image('logo', '~/public/assets/phaser3-logo.png')
+        this.load.image('logo', '/assets/phaser3-logo.png')
     }
     create() {
         const logo = this.add.image(400, 70, 'logo')
