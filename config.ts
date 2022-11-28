@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-export default {
+export const config = {
     type: Phaser.AUTO,
     parent: 'game',
     backgroundColor: '#33A5E7',

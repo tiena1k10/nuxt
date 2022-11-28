@@ -1,6 +1,8 @@
 import Phaser from 'phaser'
 
-export default class Demo extends Phaser.Scene {
+export const x = 'test'
+
+export class Demo extends Phaser.Scene {
     constructor() {
         super('GameScene')
     }
