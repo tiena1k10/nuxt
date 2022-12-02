@@ -4,14 +4,18 @@
     </div>
 </template>
 <script>
+import io from 'socket.io-client'
+import { SOCKET_EVENT_JOIN } from '~/src/common/socket/socket.event'
 export default {
     data() {
-        return {
-            a: 123,
-        }
+        return {}
     },
     mounted() {
-        console.log('asdsdajgh')
+        // const socket = io.connect('ws://127.0.0.1:7880')
+        // socket.on('connect', () => {
+        //     console.log('Successfully connected!')
+        // })
+        // socket.emit(SOCKET_EVENT_JOIN, { a: 'b', c: [] })
     },
 }
 </script>

@@ -137,13 +137,9 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
         extractCSS: true,
-        transpile: {}
+        transpile: {},
     },
 
-    publicRuntimeConfig: {
-        iosAppURL: 'https://apps.apple.com/by/app/bitu-luy%E1%BB%87n-n%C3%B3i-ti%E1%BA%BFng-anh/id1551918315',
-        androidAppURL: 'https://play.google.com/store/apps/details?id=com.bitu.user&utm_source=bituweb&utm_medium=landingpage&utm_campaign=official',
-    },
     // build time
     // EXPOSE ENV TO CLIENT SIDE
     env: {
@@ -158,4 +154,6 @@ export default {
         host: '0.0.0.0',
         port: 3000,
     },
+    ssr: false,
+    target: 'static',
 }

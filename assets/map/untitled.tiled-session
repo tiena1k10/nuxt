@@ -1,0 +1,24 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "example_map.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 10,
+            "viewCenter": {
+                "x": 404.6666666666667,
+                "y": 368
+            }
+        },
+        "example_map.tmx#tilesheet": {
+            "scaleInDock": 1
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "example_map.tmx"
+    ]
+}

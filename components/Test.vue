@@ -1,18 +1,17 @@
 <template>
     <div><div id="game"></div></div>
 </template>
-<script lang="ts" type="module">
-import { Game } from 'phaser'
-import { config } from '../config'
-import { x, Demo } from '../scenes/Demo'
+<script lang="ts">
+import Phaser from 'phaser'
+import config from '~/src/config'
+import { Demo } from '@/src/scenes/Game'
 import Vue from 'vue'
-
 export default Vue.extend({
     data() {
         return {}
     },
     mounted() {
-        new Game(
+        new Phaser.Game(
             Object.assign(config, {
                 scene: [Demo],
             })
